@@ -5,8 +5,8 @@ public class Main {
 		Process p = new Process();
 		p.removeOldEntries(true);
 		
-		// Remove events that occurred before 1 minute
-		p.setTimeout(60000);
+		// Remove events that occurred before 10 minutes
+		p.setTimeout(600000);
 		
 		// Periodically removes old events from memory
 		p.monitorCache();
@@ -18,7 +18,7 @@ public class Main {
 		
 		// Does not process this event since it is a duplicate
 		p.processEvent("1", "Hello");
-		Thread.sleep(60000);
+		Thread.sleep(700000);
 		
 		// Processes this event now since the old event with ID "1" 
 		// has been removed from memory

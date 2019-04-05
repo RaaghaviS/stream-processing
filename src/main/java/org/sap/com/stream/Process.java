@@ -13,7 +13,7 @@ public class Process {
 	private LinkedList<Event> queue = new LinkedList<Event>();
 	
 	// Time until which an event remains in memory
-	private int timeout = 60000;
+	private int timeout = 600000;
 	
 	// Flag that decides whether or not to delete entries from memory
 	private boolean removeOldEntries = true;
@@ -25,7 +25,7 @@ public class Process {
 			synchronized(set) {
 				set.add(eventID);
 			}
-			queue.push(event);
+			queue.add(event);
 			processEventsWithoutDuplicates(eventID, eventBody);
 		}
 	}
