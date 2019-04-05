@@ -22,7 +22,9 @@ public class Process {
 		System.out.println("\nReceived event: " + eventID);
 		if (!set.contains(eventID)) {
 			Event event = new Event(eventID, System.currentTimeMillis());
-			set.add(eventID);
+			synchronized(set) {
+				set.add(eventID);
+			}
 			queue.push(event);
 			processEventsWithoutDuplicates(eventID, eventBody);
 		}
@@ -45,7 +47,9 @@ public class Process {
 						long elaspedTime = System.currentTimeMillis() - event.getTimestamp();
 						if (elaspedTime > timeout) {
 							queue.pop();
-							set.remove(event.getEventID());
+							synchronized(set) {
+								set.remove(event.getEventID());
+							}
 						}
 					}
 					try {
